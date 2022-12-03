@@ -1,4 +1,4 @@
-package com.alexlis.dto.pet.specs;
+package com.alexlis.specs;
 
 import com.alexlis.helpers.CustomLogFilter;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -22,5 +22,4 @@ public class Specs {
             .expectStatusCode(201)
             .log(LogDetail.BODY)
             .build();
-
 }
