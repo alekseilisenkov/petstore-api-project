@@ -1,1 +1,1 @@
-# reqres-api-project
+# petStore-api-project
