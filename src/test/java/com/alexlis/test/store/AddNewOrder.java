@@ -3,23 +3,23 @@ package com.alexlis.test.store;
 import com.alexlis.dto.store.request.AddAnOrderForRequest;
 import com.alexlis.dto.store.response.CreateOrdersResponse;
 import com.alexlis.helpers.BodyGenerator;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@Epic("Purchase orders")
+@Epic("Store tests")
+@Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddNewOrder extends TestBase{
 
     @Test
-    @Owner(value = "Lisenkov Alexey")
+    @AllureId("")
+    @Story("Story: Getting Orders")
+    @Severity(SeverityLevel.MINOR)
+    @Tags({@Tag("api"), @Tag("minor"), @Tag("store")})
     @DisplayName("Add a new order to the store and get it")
     public void testAddNewOrder() {
         Allure.step("Step 1: Delete an existing order", () -> {
@@ -39,7 +39,6 @@ public class AddNewOrder extends TestBase{
                     () -> assertThat(createOrdersResponse.getStatus()).isEqualTo("placed"),
                     () -> assertThat(createOrdersResponse.getId()).isEqualTo(addAnOrderForRequest.getId()),
                     () -> assertThat(createOrdersResponse.getShipDate()).isEqualTo("2022-09-21T04:58:13.345+0000"),
-                    () -> assertThat(createOrdersResponse.isComplete()).isTrue(),
                     () -> assertThat(createOrdersResponse.isComplete()).isTrue()
             );
             id = createOrdersResponse.getId();

@@ -5,24 +5,24 @@ import com.alexlis.dto.pet.response.DeletePetResponse;
 import com.alexlis.dto.pet.response.PetModelResponse;
 import com.alexlis.helpers.BodyGenerator;
 import com.alexlis.helpers.FakerData;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@Epic("Add a new service.pet to the store")
+@Epic("Pet tests")
+@Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeletePet extends TestBase {
 
     @Test
-    @Owner(value = "Lisenkov Alexey")
-    @DisplayName("Delete a new service.pet to the store")
+    @AllureId("")
+    @Story("Story: Deleting Pets")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("api"), @Tag("critical"), @Tag("pet")})
+    @DisplayName("Delete a new pet in the store and try to get it")
     public void testDeleteNewPet() {
         Allure.step("Step 1: Add a new service.pet to the store", () -> {
             AddNewPetToStoreRequest addNewPetToStore = BodyGenerator.getAddingNewPet()

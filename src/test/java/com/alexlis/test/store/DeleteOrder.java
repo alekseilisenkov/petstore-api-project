@@ -5,23 +5,25 @@ import com.alexlis.dto.store.response.CreateOrdersResponse;
 import com.alexlis.dto.store.response.DeleteOrderResponse;
 import com.alexlis.helpers.BodyGenerator;
 import com.alexlis.helpers.FakerData;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@Epic("Purchase orders")
+@Epic("Store tests")
+@Severity(SeverityLevel.MINOR)
+@Owner(value = "Lisenkov Alexey")
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteOrder extends TestBase {
 
     @Test
-    @Owner(value = "Lisenkov Alexey")
+    @AllureId("")
+    @Story("Story: Deleting Orders")
+    @Severity(SeverityLevel.BLOCKER)
+    @Tags({@Tag("api"), @Tag("blocker"), @Tag("store")})
     @DisplayName("Delete created order to the store and try to get it")
     public void testDeleteCreatedOrder() {
         Allure.step("Step 1: Add a new order to the store", () -> {

@@ -3,24 +3,24 @@ package com.alexlis.test.pet;
 import com.alexlis.dto.pet.request.AddNewPetToStoreRequest;
 import com.alexlis.dto.pet.response.PetModelResponse;
 import com.alexlis.helpers.BodyGenerator;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@Epic("Add a new service.pet to the store")
+@Epic("Pet tests")
+@Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddNewPetToStore extends TestBase {
 
     @Test
-    @Owner(value = "Lisenkov Alexey")
-    @DisplayName("Add a new service.pet to the store")
+    @AllureId("")
+    @Story("Story: Getting Pets")
+    @Severity(SeverityLevel.MINOR)
+    @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})
+    @DisplayName("Add a new pet in the store and try to get it")
     public void testAddNewPetToStore() {
         Allure.step("Step 1: Create new pet", () -> {
             AddNewPetToStoreRequest addNewPetToStore = BodyGenerator.getAddingNewPet()
@@ -42,6 +42,20 @@ public class AddNewPetToStore extends TestBase {
                     () -> assertThat(petModelResponse.getCategory().getName()).withFailMessage("Name doesn't match").isEqualTo("Dima"),
                     () -> assertThat(petModelResponse.getName()).isEqualTo("John"),
                     () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(1515)
+            );
+            id = petModelResponse.getId();
+        });
+
+        Allure.step("Step 2: Search created pet", () -> {
+            petModelResponse = petClient.getPet(id)
+                    .assertThat()
+                    .statusCode(HttpStatus.SC_OK)
+                    .extract().as(PetModelResponse.class);
+
+            assertAll(
+                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Dima"),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(1515),
+                    () -> assertThat(petModelResponse.getId()).isEqualTo(500)
             );
         });
     }
