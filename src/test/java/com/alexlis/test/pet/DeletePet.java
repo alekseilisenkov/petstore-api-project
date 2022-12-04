@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class DeletePet extends TestBase {
 
     @Test
-    @AllureId("")
+//    @AllureId("")
     @Story("Story: Deleting Pets")
     @Severity(SeverityLevel.CRITICAL)
     @Tags({@Tag("api"), @Tag("critical"), @Tag("pet")})

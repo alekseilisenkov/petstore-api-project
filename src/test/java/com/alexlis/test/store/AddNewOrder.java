@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class AddNewOrder extends TestBase{
 
     @Test
-    @AllureId("")
+//    @AllureId("")
     @Story("Story: Getting Orders")
     @Severity(SeverityLevel.MINOR)
     @Tags({@Tag("api"), @Tag("minor"), @Tag("store")})

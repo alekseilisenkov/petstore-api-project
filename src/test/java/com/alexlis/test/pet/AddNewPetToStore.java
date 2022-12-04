@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class AddNewPetToStore extends TestBase {
 
     @Test
-    @AllureId("")
+//    @AllureId("")
     @Story("Story: Getting Pets")
     @Severity(SeverityLevel.MINOR)
     @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})

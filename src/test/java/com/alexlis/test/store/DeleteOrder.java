@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class DeleteOrder extends TestBase {
 
     @Test
-    @AllureId("")
+//    @AllureId("")
     @Story("Story: Deleting Orders")
     @Severity(SeverityLevel.BLOCKER)
     @Tags({@Tag("api"), @Tag("blocker"), @Tag("store")})
