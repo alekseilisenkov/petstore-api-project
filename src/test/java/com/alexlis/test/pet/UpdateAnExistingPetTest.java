@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class UpdateAnExistingPetTest extends TestBase {
 
     @Test
-//    @AllureId("")
     @Story("Story: Updating Pets")
     @Severity(SeverityLevel.BLOCKER)
     @Tags({@Tag("api"), @Tag("blocker"), @Tag("pet")})
@@ -30,7 +29,7 @@ public class UpdateAnExistingPetTest extends TestBase {
                     .withName(FakerData.getRandomName())
                     .withCategory(AddNewPetToStoreRequest.Category.builder()
                             .id(Integer.parseInt(FakerData.getRandomId()))
-                            .name("Animal")
+                            .name(FakerData.getRandomWord())
                             .build())
                     .please();
 
@@ -40,11 +39,12 @@ public class UpdateAnExistingPetTest extends TestBase {
                     .extract().as(PetModelResponse.class);
 
             assertAll(
-                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Animal")
+                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo(addNewPetToStore.getCategory().getName()),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(addNewPetToStore.getCategory().getId()),
+                    () -> assertThat(petModelResponse.getId()).isEqualTo(addNewPetToStore.getId())
             );
             name = petModelResponse.getName();
             id = petModelResponse.getId();
-            System.out.println("Pet name is: " + name + ", id is: " + id);
         });
 
         Allure.step("Step 2: Update an existing pet", () -> {
@@ -63,18 +63,22 @@ public class UpdateAnExistingPetTest extends TestBase {
                     .extract().as(PetModelResponse.class);
 
             assertAll(
-                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Example")
+                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Example"),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(1515),
+                    () -> assertThat(petModelResponse.getId()).isEqualTo(id)
             );
         });
 
-        Allure.step("Step 3: Search created pet", () -> {
+        Allure.step("Step 3: Search updated pet", () -> {
             petModelResponse = petClient.getPet(id)
                     .assertThat()
                     .statusCode(HttpStatus.SC_OK)
                     .extract().as(PetModelResponse.class);
 
             assertAll(
-                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Example")
+                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Example"),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(1515),
+                    () -> assertThat(petModelResponse.getName()).isEqualTo(name)
             );
         });
     }

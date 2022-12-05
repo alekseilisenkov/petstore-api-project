@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class DeleteOrderTest extends TestBase {
 
     @Test
-//    @AllureId("")
     @Story("Story: Deleting Orders")
     @Severity(SeverityLevel.BLOCKER)
     @Tags({@Tag("api"), @Tag("blocker"), @Tag("store")})
@@ -37,7 +36,9 @@ public class DeleteOrderTest extends TestBase {
                     .extract().as(CreateOrdersResponse.class);
 
             assertAll(
-                    () -> assertThat(createOrdersResponse.isComplete()).isTrue()
+                    () -> assertThat(createOrdersResponse.isComplete()).isTrue(),
+                    () -> assertThat(createOrdersResponse.getId()).isEqualTo(addAnOrderForRequest.getId()),
+                    () -> assertThat(createOrdersResponse.getId()).isEqualTo(addAnOrderForRequest.getId())
             );
             id = createOrdersResponse.getId();
         });
@@ -50,7 +51,8 @@ public class DeleteOrderTest extends TestBase {
 
             assertAll(
                     () -> assertThat(deleteOrderResponse.getCode()).isEqualTo(200),
-                    () -> assertThat(deleteOrderResponse.getType()).isEqualTo("unknown")
+                    () -> assertThat(deleteOrderResponse.getType()).isEqualTo("unknown"),
+                    () -> assertThat(deleteOrderResponse.getMessage()).isNotNull()
             );
         });
 

@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class DeletePetTest extends TestBase {
 
     @Test
-//    @AllureId("")
     @Story("Story: Deleting Pets")
     @Severity(SeverityLevel.CRITICAL)
     @Tags({@Tag("api"), @Tag("critical"), @Tag("pet")})
@@ -40,7 +39,9 @@ public class DeletePetTest extends TestBase {
                     .extract().as(PetModelResponse.class);
 
             assertAll(
-                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Animal")
+                    () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Animal"),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(addNewPetToStore.getId()),
+                    () -> assertThat(petModelResponse.getCategory()).isNotNull()
             );
             name = petModelResponse.getName();
             id = petModelResponse.getId();
@@ -67,7 +68,8 @@ public class DeletePetTest extends TestBase {
 
             assertAll(
                     () -> assertThat(deletePetResponse.getType()).isEqualTo("error"),
-                    () -> assertThat(deletePetResponse.getMessage()).isEqualTo("Pet not found")
+                    () -> assertThat(deletePetResponse.getMessage()).isEqualTo("Pet not found"),
+                    () -> assertThat(deletePetResponse.getCode()).isEqualTo(1)
             );
         });
     }

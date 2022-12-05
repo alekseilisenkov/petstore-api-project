@@ -3,6 +3,7 @@ package com.alexlis.test.pet;
 import com.alexlis.dto.pet.request.AddNewPetToStoreRequest;
 import com.alexlis.dto.pet.response.PetModelResponse;
 import com.alexlis.helpers.BodyGenerator;
+import com.alexlis.helpers.FakerData;
 import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.*;
@@ -13,10 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Epic("Pet tests")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AddNewPetToStoreTest extends TestBase {
+public class AddNewPetToStoreTests extends TestBase {
 
     @Test
-//    @AllureId("")
     @Story("Story: Getting Pets")
     @Severity(SeverityLevel.MINOR)
     @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})
@@ -56,6 +56,49 @@ public class AddNewPetToStoreTest extends TestBase {
                     () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Dima"),
                     () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(1515),
                     () -> assertThat(petModelResponse.getId()).isEqualTo(500)
+            );
+        });
+    }
+
+    @Test
+    @Story("Story: Getting Pets")
+    @Severity(SeverityLevel.MINOR)
+    @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})
+    @DisplayName("Add a new pet in the store and try to get it")
+    public void testAddNewRandomPetToStore() {
+        Allure.step("Step 1: Create new pet", () -> {
+            AddNewPetToStoreRequest addNewPetToStore = BodyGenerator.getAddingNewPet()
+                    .withId(Integer.parseInt(FakerData.getRandomId()))
+                    .withName(FakerData.getRandomName())
+                    .withStatus(FakerData.getRandomWord())
+                    .withCategory(AddNewPetToStoreRequest.Category.builder()
+                            .id(Integer.parseInt(FakerData.getRandomId()))
+                            .name(FakerData.getRandomWord())
+                            .build())
+                    .please();
+
+            petModelResponse = petClient.addPet(addNewPetToStore)
+                    .assertThat()
+                    .statusCode(HttpStatus.SC_OK)
+                    .extract().as(PetModelResponse.class);
+
+            assertAll(
+                    () -> assertThat(petModelResponse.getCategory().getName()).isNotNull(),
+                    () -> assertThat(petModelResponse.getName()).isEqualTo(addNewPetToStore.getName()),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(addNewPetToStore.getCategory().getId())
+            );
+        });
+
+        Allure.step("Step 2: Search created pet", () -> {
+            petModelResponse = petClient.getPet(petModelResponse.getId())
+                    .assertThat()
+                    .statusCode(HttpStatus.SC_OK)
+                    .extract().as(PetModelResponse.class);
+
+            assertAll(
+                    () -> assertThat(petModelResponse.getCategory().getName()).isNotNull(),
+                    () -> assertThat(petModelResponse.getCategory().getId()).isNotNull(),
+                    () -> assertThat(petModelResponse.getId()).isNotNull()
             );
         });
     }

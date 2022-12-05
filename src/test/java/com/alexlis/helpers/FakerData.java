@@ -15,4 +15,8 @@ public class FakerData {
     public static String getRandomId() {
         return FAKER.regexify("[0-9]{6}");
     }
+
+    public static String getRandomWord() {
+        return FAKER.regexify("TEST([A-Z]{1}[a-z]{6})");
+    }
 }
