@@ -23,7 +23,7 @@ public class DeletePetTest extends TestBase {
     @Tags({@Tag("api"), @Tag("critical"), @Tag("pet")})
     @DisplayName("Delete a new pet in the store and try to get it")
     public void testDeleteNewPet() {
-        Allure.step("Step 1: Add a new service.pet to the store", () -> {
+        Allure.step("Step 1: Add a new pet to the store", () -> {
             AddNewPetToStoreRequest addNewPetToStore = BodyGenerator.getAddingNewPet()
                     .withId(Integer.parseInt(FakerData.getRandomId()))
                     .withName(FakerData.getRandomName())
@@ -40,7 +40,7 @@ public class DeletePetTest extends TestBase {
 
             assertAll(
                     () -> assertThat(petModelResponse.getCategory().getName()).isEqualTo("Animal"),
-                    () -> assertThat(petModelResponse.getCategory().getId()).isEqualTo(addNewPetToStore.getId()),
+                    () -> assertThat(petModelResponse.getId()).isEqualTo(addNewPetToStore.getId()),
                     () -> assertThat(petModelResponse.getCategory()).isNotNull()
             );
             name = petModelResponse.getName();
