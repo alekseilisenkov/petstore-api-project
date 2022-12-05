@@ -1,5 +1,7 @@
 package com.alexlis.test.store;
 
+import com.alexlis.allureannotations.JiraIssue;
+import com.alexlis.allureannotations.Microservice;
 import com.alexlis.dto.store.request.AddAnOrderForRequest;
 import com.alexlis.dto.store.response.CreateOrdersResponse;
 import com.alexlis.dto.store.response.DeleteOrderResponse;
@@ -13,13 +15,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @Epic("Store tests")
+@Microservice("Swagger")
 @Severity(SeverityLevel.MINOR)
 @Owner(value = "Lisenkov Alexey")
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteOrderTest extends TestBase {
 
     @Test
+    @JiraIssue("AUTO-1451")
     @Story("Story: Deleting Orders")
     @Severity(SeverityLevel.BLOCKER)
     @Tags({@Tag("api"), @Tag("blocker"), @Tag("store")})

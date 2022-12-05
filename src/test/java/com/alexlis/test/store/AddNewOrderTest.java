@@ -1,5 +1,7 @@
 package com.alexlis.test.store;
 
+import com.alexlis.allureannotations.JiraIssue;
+import com.alexlis.allureannotations.Microservice;
 import com.alexlis.dto.store.request.AddAnOrderForRequest;
 import com.alexlis.dto.store.response.CreateOrdersResponse;
 import com.alexlis.helpers.BodyGenerator;
@@ -12,11 +14,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @Epic("Store tests")
+@Microservice("Swagger")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddNewOrderTest extends TestBase {
 
     @Test
+    @JiraIssue("AUTO-1451")
     @Severity(SeverityLevel.MINOR)
     @Story("Story: Getting Orders")
     @Tags({@Tag("api"), @Tag("minor"), @Tag("store")})
@@ -41,6 +45,7 @@ public class AddNewOrderTest extends TestBase {
     }
 
     @Test
+    @JiraIssue("AUTO-1451")
     @Severity(SeverityLevel.MINOR)
     @Story("Story: Getting Orders")
     @Tags({@Tag("api"), @Tag("minor"), @Tag("store")})

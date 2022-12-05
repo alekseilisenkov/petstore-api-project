@@ -1,5 +1,7 @@
 package com.alexlis.test.pet;
 
+import com.alexlis.allureannotations.JiraIssue;
+import com.alexlis.allureannotations.Microservice;
 import com.alexlis.dto.pet.request.AddNewPetToStoreRequest;
 import com.alexlis.dto.pet.response.DeletePetResponse;
 import com.alexlis.dto.pet.response.PetModelResponse;
@@ -13,11 +15,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @Epic("Pet tests")
+@Microservice("Swagger")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeletePetTest extends TestBase {
 
     @Test
+    @JiraIssue("AUTO-1451")
     @Story("Story: Deleting Pets")
     @Severity(SeverityLevel.CRITICAL)
     @Tags({@Tag("api"), @Tag("critical"), @Tag("pet")})

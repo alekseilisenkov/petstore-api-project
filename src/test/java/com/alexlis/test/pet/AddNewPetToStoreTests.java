@@ -1,5 +1,7 @@
 package com.alexlis.test.pet;
 
+import com.alexlis.allureannotations.JiraIssue;
+import com.alexlis.allureannotations.Microservice;
 import com.alexlis.dto.pet.request.AddNewPetToStoreRequest;
 import com.alexlis.dto.pet.response.PetModelResponse;
 import com.alexlis.helpers.BodyGenerator;
@@ -12,12 +14,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @Epic("Pet tests")
+@Microservice("Swagger")
+@Story("Story: Getting Pets")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddNewPetToStoreTests extends TestBase {
 
     @Test
-    @Story("Story: Getting Pets")
+    @JiraIssue("AUTO-1451")
     @Severity(SeverityLevel.MINOR)
     @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})
     @DisplayName("Add a new pet in the store and try to get it")
@@ -61,7 +65,7 @@ public class AddNewPetToStoreTests extends TestBase {
     }
 
     @Test
-    @Story("Story: Getting Pets")
+    @JiraIssue("AUTO-1451")
     @Severity(SeverityLevel.MINOR)
     @Tags({@Tag("api"), @Tag("minor"), @Tag("pet")})
     @DisplayName("Add a new pet in the store and try to get it")
