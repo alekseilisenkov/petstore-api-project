@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Epic("Pet tests")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UpdateAnExistingPet extends TestBase {
+public class UpdateAnExistingPetTest extends TestBase {
 
     @Test
 //    @AllureId("")

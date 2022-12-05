@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Epic("Store tests")
 @Owner(value = "Lisenkov Alexey")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AddNewOrder extends TestBase{
+public class AddNewOrderTest extends TestBase{
 
     @Test
 //    @AllureId("")

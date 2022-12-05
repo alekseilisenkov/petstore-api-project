@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Owner(value = "Lisenkov Alexey")
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DeleteOrder extends TestBase {
+public class DeleteOrderTest extends TestBase {
 
     @Test
 //    @AllureId("")
