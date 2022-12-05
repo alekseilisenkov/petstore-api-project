@@ -15,11 +15,15 @@ public class Specs {
             .filter(CustomLogFilter.customLogFilter().withCustomTemplates())
             .log().uri()
             .log().body()
-            .log().method()
             .contentType(ContentType.JSON);
 
-    public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
-            .expectStatusCode(201)
+    public static ResponseSpecification customResponseSpecification = new ResponseSpecBuilder()
+            .expectStatusCode(200)
+            .log(LogDetail.BODY)
+            .build();
+
+    public static ResponseSpecification customDeleteResponseSpecification = new ResponseSpecBuilder()
+            .expectStatusCode(404)
             .log(LogDetail.BODY)
             .build();
 }

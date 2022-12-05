@@ -55,7 +55,7 @@ public class DeleteOrderTest extends TestBase {
         });
 
         Allure.step("Step 3: Get deleted order", () -> {
-            deleteOrderResponse = storeClient.findPurchaseOrder(id)
+            deleteOrderResponse = storeClient.findDeletedPurchaseOrder(id)
                     .assertThat()
                     .statusCode(HttpStatus.SC_NOT_FOUND)
                     .extract().as(DeleteOrderResponse.class);

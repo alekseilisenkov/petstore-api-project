@@ -60,7 +60,7 @@ public class DeletePetTest extends TestBase {
         });
 
         Allure.step("Step 3: Check deleted pet for existing", () -> {
-            deletePetResponse = petClient.getPet(id)
+            deletePetResponse = petClient.getDeletedPet(id)
                     .assertThat()
                     .statusCode(HttpStatus.SC_NOT_FOUND)
                     .extract().as(DeletePetResponse.class);
