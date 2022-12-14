@@ -66,6 +66,10 @@ STATUS
 <br >
 <a href="https://ibb.co/TvwPjzj"><img src="images/Screenshot_4 Allure.png" alt="" border="0"></a>
 
+START PARAMETERS
+<br >
+<a href="https://ibb.co/TvwPjzj"><img src="images/Allure.png" alt="" border="0"></a>
+
 ## Интеграция с JIRA:
 <a href="https://ibb.co/TvwPjzj"><img src="images/Screenshot_5 Allure.png" alt="" border="0"></a>
 
